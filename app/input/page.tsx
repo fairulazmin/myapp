@@ -20,8 +20,8 @@ const App = () => {
   };
 
   return (
-    <div>
-      <div>Handler training</div>
+    <div className="flex flex-col items-center">
+      <div className="text-xl mb-3">Input handler</div>
       <div className="w-56 space-y-5">
         <Input
           name="name"
