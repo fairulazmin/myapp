@@ -1,20 +1,18 @@
 "use client";
 
 import { Input } from "@/components/ui/input";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const App = () => {
   const [name, setName] = useState<string | null>(null);
   const [age, setAge] = useState<number | null>(null);
 
   const nameHandler = (e: React.FormEvent<HTMLInputElement>) => {
-    e.preventDefault();
     setName(e.currentTarget.value);
     console.log("Name: ", name);
   };
 
   const ageHandler = (e: React.FormEvent<HTMLInputElement>) => {
-    e.preventDefault();
     setAge(parseFloat(e.currentTarget.value));
     console.log("Age: ", age);
   };

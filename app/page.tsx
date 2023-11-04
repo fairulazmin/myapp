@@ -14,7 +14,10 @@ export default function Home() {
           <Link href="/input">Input</Link>
         </li>
         <li>
-          <Link href="/inputWithCalc">Input - Can perform calculation</Link>
+          <Link href="/inputCalc">InputCalc</Link>
+        </li>
+        <li>
+          <Link href="/inputCalc2">InputCalc2</Link>
         </li>
         <li>
           <Link href="/counter">Counter</Link>
