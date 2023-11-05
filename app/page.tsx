@@ -25,6 +25,12 @@ export default function Home() {
         <li>
           <Link href="/counters">Counters</Link>
         </li>
+        <li>
+          <Link href="/inputSelect">InputSelect</Link>
+        </li>
+        <li>
+          <Link href="/muTable">MU Table</Link>
+        </li>
       </ul>
     </div>
   );
