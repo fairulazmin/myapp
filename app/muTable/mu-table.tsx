@@ -1,3 +1,5 @@
+"use client";
+
 import {
   Table,
   TableBody,
@@ -7,7 +9,6 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-
 import {
   Select,
   SelectGroup,
@@ -16,44 +17,12 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-
 import { Input } from "@/components/ui/input";
-import { SourceType } from "./typedef";
-
-const muSources: SourceType[] = [
-  {
-    source: "Calibration Cert of Multimeter",
-    value: 0.0026,
-    distribution: "Normal",
-    type: "B",
-    divisor: 2,
-    ui: 0.001,
-    ci: 1,
-    vi: "∞",
-  },
-  {
-    source: "Accuracy of Multimeter",
-    value: 0.011,
-    distribution: "Rectangular",
-    type: "B",
-    divisor: "√3",
-    ui: 0.001,
-    ci: 1,
-    vi: "∞",
-  },
-  {
-    source: "Calibration Cert of Multimeter",
-    value: 0.0001,
-    distribution: "Rectangular",
-    type: "B",
-    divisor: "√3",
-    ui: 0.0,
-    ci: 1,
-    vi: "∞",
-  },
-];
+import { useMuStore } from "./use-mu-store";
 
 export const MuTable = () => {
+  const { sources, titleAction, distributionAction } = useMuStore();
+
   return (
     <Table>
       <TableCaption>
@@ -78,14 +47,21 @@ export const MuTable = () => {
         </TableRow>
       </TableHeader>
       <TableBody>
-        {muSources.map((muSource, idx) => (
-          <TableRow key={idx}>
+        {sources.map((source, id) => (
+          <TableRow key={id}>
             <TableCell>
-              <Input className="border-none" value={muSource.source} />
+              <Input
+                onChange={(e) => titleAction(e, id)}
+                className="border-none"
+                value={source.title}
+              />
             </TableCell>
-            <TableCell>{muSource.value}</TableCell>
+            <TableCell>{source.value}</TableCell>
             <TableCell>
-              <Select value={muSource.distribution}>
+              <Select
+                value={source.distribution}
+                onValueChange={(e) => distributionAction(e, id)}
+              >
                 <SelectTrigger className="border-none">
                   <SelectValue />
                 </SelectTrigger>
@@ -99,7 +75,7 @@ export const MuTable = () => {
               </Select>
             </TableCell>
             <TableCell>
-              <Select value={muSource.type}>
+              <Select value={source.type}>
                 <SelectTrigger className="border-none">
                   <SelectValue />
                 </SelectTrigger>
@@ -111,7 +87,7 @@ export const MuTable = () => {
             </TableCell>
             <TableCell className="flex relative">
               <Input className="border-none" />
-              <Select>
+              <Select value={source.divisor}>
                 <SelectTrigger className="bg-opacity-100 border-none absolute right-4 w-10 focus:border-none"></SelectTrigger>
                 <SelectContent>
                   <SelectGroup>
@@ -122,9 +98,9 @@ export const MuTable = () => {
                 </SelectContent>
               </Select>
             </TableCell>
-            <TableCell>{muSource.ui}</TableCell>
-            <TableCell>{muSource.ci}</TableCell>
-            <TableCell>{muSource.vi}</TableCell>
+            <TableCell>{source.ui}</TableCell>
+            <TableCell>{source.ci}</TableCell>
+            <TableCell>{source.vi}</TableCell>
           </TableRow>
         ))}
       </TableBody>

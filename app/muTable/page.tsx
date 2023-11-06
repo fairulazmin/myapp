@@ -1,7 +1,11 @@
 import { MuTable } from "./mu-table";
 
 const MuTablePage = () => {
-  return <MuTable />;
+  return (
+    <div className="container mx-auto">
+      <MuTable />
+    </div>
+  );
 };
 
 export default MuTablePage;

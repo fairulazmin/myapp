@@ -13,14 +13,14 @@ export const useCountsStore = create<Counters>((set) => ({
   counts: [0, 1, 2, 3, 4],
 
   // methods for manipulating state
-  increment: (id: number) =>
+  increment: (id) =>
     set((state) => {
       const nums = [...state.counts];
       nums[id]++;
       return { counts: nums };
     }),
 
-  decrement: (id: number) =>
+  decrement: (id) =>
     set((state) => {
       const nums = [...state.counts];
       nums[id]--;
@@ -33,7 +33,7 @@ export const useCountsStore = create<Counters>((set) => ({
       return { counts: nums };
     }),
 
-  remove: (id: number) =>
+  remove: (id) =>
     set((state) => {
       const nums = [...state.counts];
       nums.splice(id, 1);

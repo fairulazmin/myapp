@@ -20,13 +20,17 @@ export default function Home() {
           <Link href="/inputCalc2">InputCalc2</Link>
         </li>
         <li>
-          <Link href="/counter">Counter</Link>
+          <Link href="/inputSelect">InputSelect</Link>
         </li>
+        <Link href="/counter">Counter</Link>
         <li>
           <Link href="/counters">Counters</Link>
         </li>
         <li>
-          <Link href="/inputSelect">InputSelect</Link>
+          <Link href="/switch">Switch</Link>
+        </li>
+        <li>
+          <Link href="/todolist">Todo list</Link>
         </li>
         <li>
           <Link href="/muTable">MU Table</Link>
