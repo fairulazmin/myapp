@@ -35,6 +35,12 @@ export default function Home() {
         <li>
           <Link href="/muTable">MU Table</Link>
         </li>
+        <li>
+          <Link href="/payment">Table - Payment</Link>
+        </li>
+        <li>
+          <Link href="/tasks">Table - Tasks</Link>
+        </li>
       </ul>
     </div>
   );
