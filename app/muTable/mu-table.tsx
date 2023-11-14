@@ -21,7 +21,13 @@ import { Input } from "@/components/ui/input";
 import { useMuStore } from "./use-mu-store";
 
 export const MuTable = () => {
-  const { sources, titleAction, distributionAction } = useMuStore();
+  const {
+    sources,
+    titleAction,
+    distributionAction,
+    typeAction,
+    divisorAction,
+  } = useMuStore();
 
   return (
     <Table>
@@ -30,25 +36,25 @@ export const MuTable = () => {
       </TableCaption>
       <TableHeader>
         <TableRow>
-          <TableHead>Source of Uncertainty</TableHead>
-          <TableHead>± Value</TableHead>
-          <TableHead>Probability distribution</TableHead>
-          <TableHead>Distribution type</TableHead>
-          <TableHead>Divisor</TableHead>
-          <TableHead>
+          <TableHead className="w-4/12">Source of Uncertainty</TableHead>
+          <TableHead className="w-1/12">± Value</TableHead>
+          <TableHead className="w-2/12">Probability distribution</TableHead>
+          <TableHead className="w-1/12">Distribution type</TableHead>
+          <TableHead className="w-1/12">Divisor</TableHead>
+          <TableHead className="w-1/12">
             Standard Uncertainty, u<sub>i</sub>
           </TableHead>
-          <TableHead>
+          <TableHead className="w-1/12">
             Sensitivity Coefficient, c<sub>i</sub>
           </TableHead>
-          <TableHead>
+          <TableHead className="w-1/12">
             Degree of freedom, v<sub>i</sub>
           </TableHead>
         </TableRow>
       </TableHeader>
       <TableBody>
         {sources.map((source, id) => (
-          <TableRow key={id}>
+          <TableRow key={id} className="text-center">
             <TableCell>
               <Input
                 onChange={(e) => titleAction(e, id)}
@@ -75,7 +81,10 @@ export const MuTable = () => {
               </Select>
             </TableCell>
             <TableCell>
-              <Select value={source.type}>
+              <Select
+                value={source.type}
+                onValueChange={(e) => typeAction(e, id)}
+              >
                 <SelectTrigger className="border-none">
                   <SelectValue />
                 </SelectTrigger>
@@ -87,7 +96,10 @@ export const MuTable = () => {
             </TableCell>
             <TableCell className="flex relative">
               <Input className="border-none" />
-              <Select value={source.divisor}>
+              <Select
+                value={source.divisor}
+                onValueChange={(e) => divisorAction(e, id)}
+              >
                 <SelectTrigger className="bg-opacity-100 border-none absolute right-4 w-10 focus:border-none"></SelectTrigger>
                 <SelectContent>
                   <SelectGroup>
