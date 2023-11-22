@@ -26,7 +26,7 @@ export const useScrollTop = (threshold = 10) => {
 ```
 
 
-[navbar.tsx](https://github.com/AntonioErdeljac/notion-clone-tutorial/blob/master/app/(marketing)/_components/navbar.tsx)
+[app/(main)/_components/navbar.tsx](https://github.com/AntonioErdeljac/notion-clone-tutorial/blob/master/app/(marketing)/_components/navbar.tsx)
 ```tsx
 "use client"
 
@@ -42,6 +42,67 @@ export const Navbar = () => {
   </div>
 }
 ````
+
+## Icon
+[app/(main)/_components/navigation.tsx](https://github.com/AntonioErdeljac/notion-clone-tutorial/blob/master/app/(main)/_components/navigation.tsx)
+```tsx
+"use client";
+
+import { Search } from "lucide-react";
+
+const search = useSearch();
+
+export const Navigation = () => {
+  return (
+    <Item
+      label="Search"
+      icon={Search}
+      onClick={search.onOpen}
+    />
+  )
+}
+```
+
+[app/(main)/_components/item.tsx](https://github.com/AntonioErdeljac/notion-clone-tutorial/blob/master/app/(main)/_components/item.tsx)
+```tsx
+"use client";
+
+import { LucideIcon } from "lucide-react";
+
+interface ItemProps {
+  label: string;
+  onClick?: () => void;
+  icon: LucideIcon;
+};
+
+export const Item = ({ label, onClick, icon: Icon}: ItemProps) => {
+  return (
+    <>
+      { label }
+      <Icon className="shrink-0 h-[18px] w-[18px] mr-2 text-muted-foreground" onClick={onClick}/>
+    </>
+  )
+}
+```
+
+[hooks/use-search.tsx](https://github.com/AntonioErdeljac/notion-clone-tutorial/blob/master/hooks/use-search.tsx)
+```tsx
+import { create } from "zustand";
+
+type SearchStore = {
+  isOpen: boolean;
+  onOpen: () => void;
+  onClose: () => void;
+  toggle: () => void;
+};
+
+export const useSearch = create<SearchStore>((set, get) => ({
+  isOpen: false,
+  onOpen: () => set({ isOpen: true }),
+  onClose: () => set({ isOpen: false }),
+  toggle: () => set({ isOpen: !get().isOpen }),
+}));
+```
 
 ## Spinner
 [spinner.tsx](https://github.com/AntonioErdeljac/notion-clone-tutorial/blob/master/components/spinner.tsx)
@@ -78,7 +139,7 @@ export const Spinner = ({
 };
 ```
 
-[navbar.tsx](https://github.com/AntonioErdeljac/notion-clone-tutorial/blob/master/app/(marketing)/_components/navbar.tsx)
+[app/(main)/_components/navbar.tsx](https://github.com/AntonioErdeljac/notion-clone-tutorial/blob/master/app/(marketing)/_components/navbar.tsx)
 ```tsx
 "use client";
 
