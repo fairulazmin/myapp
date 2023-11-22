@@ -1,34 +1,96 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+## Scroll top styling
 
-## Getting Started
+[hooks/use-scroll-top.tsx](https://github.com/AntonioErdeljac/notion-clone-tutorial/blob/master/hooks/use-scroll-top.tsx)
 
-First, run the development server:
+```tsx
+import { useState, useEffect } from "react";
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
+export const useScrollTop = (threshold = 10) => {
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > threshold) {
+        setScrolled(true);
+      } else {
+        setScrolled(false);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [threshold]);
+
+  return scrolled;
+}
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+[navbar.tsx](https://github.com/AntonioErdeljac/notion-clone-tutorial/blob/master/app/(marketing)/_components/navbar.tsx)
+```tsx
+"use client"
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+import { useScrollTop } from "@/hooks/use-scroll-top";
 
-## Learn More
+export const Navbar = () => {
+  const scrolled = useScrollTop();
 
-To learn more about Next.js, take a look at the following resources:
+  <div className={cn(
+    "z-50 bg-background dark:bg-[#1F1F1F] fixed top-0 flex items-center w-full p-6",
+    scrolled && "border-b shadow-sm"
+    )}>
+  </div>
+}
+````
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Spinner
+[spinner.tsx](https://github.com/AntonioErdeljac/notion-clone-tutorial/blob/master/components/spinner.tsx)
+```tsx
+import { Loader } from "lucide-react";
+import { cva, type VariantProps } from "class-variance-authority";
+import { cn } from "@/lib/utils";
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+const spinnerVariants = cva(
+  "text-muted-foreground animate-spin",
+  {
+    variants: {
+      size: {
+        default: "h-4 w-4",
+        sm: "h-2 w-2",
+        lg: "h-6 w-6",
+        icon: "h-10 w-10"
+      }
+    },
+    defaultVariants: {
+      size: "default",
+    },
+  },
+);
 
-## Deploy on Vercel
+interface SpinnerProps extends VariantProps<typeof spinnerVariants> {}
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+export const Spinner = ({
+  size,
+}: SpinnerProps) => {
+  return (
+    <Loader className={cn(spinnerVariants({ size }))} />
+  );
+};
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+[navbar.tsx](https://github.com/AntonioErdeljac/notion-clone-tutorial/blob/master/app/(marketing)/_components/navbar.tsx)
+```tsx
+"use client";
+
+import { Spinner } from "@/components/spinner";
+
+export const Navbar = () => {
+  const { isLoading, setIsLoading } = useState(false);
+
+  return (
+    {isLoading && (
+      <Spinner />
+     )}
+  )
+}
+```
