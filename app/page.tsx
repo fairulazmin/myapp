@@ -22,6 +22,9 @@ export default function Home() {
         <li>
           <Link href="/inputSelect">InputSelect</Link>
         </li>
+        <li>
+          <Link href="/inputButton">InputButton</Link>
+        </li>
         <Link href="/counter">Counter</Link>
         <li>
           <Link href="/counters">Counters</Link>
