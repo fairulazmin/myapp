@@ -155,3 +155,85 @@ export const Navbar = () => {
   )
 }
 ```
+
+## Font
+[app/(marketing)/page.tsx](https://github.com/AntonioErdeljac/next13-trello/blob/master/app/(marketing)/page.tsx)
+
+#### Local Font
+```tsx
+import localFont from "next/font/local";
+
+const headingFont = localFont({
+  src: "../../public/fonts/font.woff2"
+});
+
+const MarketingPage = () => {
+  return (
+      <div className={cn(
+        "flex items-center justify-center flex-col",
+        headingFont.className,
+      )}>
+        No 1 task managment
+      </div>
+  )
+}
+```
+
+#### Google Font
+```tsx
+import { Poppins } from "next/font/google";
+
+const textFont = Poppins({
+  subsets: ["latin"],
+  weight: [
+    "100",
+    "200",
+    "300",
+    "400",
+    "500",
+    "600",
+    "700",
+    "800",
+    "900"
+  ],
+});
+
+const MarketingPage = () => {
+  return (
+    <div className={cn(
+      "text-sm md:text-xl text-neutral-400 mt-4 max-w-xs md:max-w-2xl text-center mx-auto",
+      textFont.className,
+    )}>
+      Collaborate, manage projects, and reach new productivity peaks.
+    </div>
+  )
+}
+```
+
+## Metadata
+[config/site.ts](https://github.com/AntonioErdeljac/next13-trello/blob/master/config/site.ts)
+```tsx
+export const siteConfig = {
+  name: "Taskify",
+  description: "Collaborate, manage projects, and reach new productivity peaks",
+};
+```
+
+[app/layout.tsx](https://github.com/AntonioErdeljac/next13-trello/blob/master/app/layout.tsx)
+```tsx
+import { siteConfig } from '@/config/site'
+
+export const metadata: Metadata = {
+  title: {
+    default: siteConfig.name,
+    template: `%s | ${siteConfig.name}`,
+  },
+  description: siteConfig.description,
+  icons: [
+    {
+      url: "/logo.svg",
+      href: "/logo.svg"
+    }
+  ]
+}
+```
