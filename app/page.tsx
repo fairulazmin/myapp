@@ -33,6 +33,9 @@ export default function Home() {
           <Link href="/switch">Switch</Link>
         </li>
         <li>
+          <Link href="/sidebar">Sidebar</Link>
+        </li>
+        <li>
           <Link href="/todolist">Todo list</Link>
         </li>
         <li>
