@@ -25,6 +25,9 @@ export default function Home() {
         <li>
           <Link href="/inputButton">InputButton</Link>
         </li>
+        <li>
+          <Link href="/inputZod">InputZod</Link>
+        </li>
         <Link href="/counter">Counter</Link>
         <li>
           <Link href="/counters">Counters</Link>
@@ -40,6 +43,9 @@ export default function Home() {
         </li>
         <li>
           <Link href="/muTable">MU Table</Link>
+        </li>
+        <li>
+          <Link href="/acc_calb">Accelerometer Calibration</Link>
         </li>
         <li>
           <Link href="/payment">Table - Payment</Link>
