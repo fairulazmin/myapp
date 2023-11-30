@@ -42,6 +42,9 @@ export default function Home() {
           <Link href="/todolist">Todo list</Link>
         </li>
         <li>
+          <Link href="/tempConverter">Temperature Converter</Link>
+        </li>
+        <li>
           <Link href="/muTable">MU Table</Link>
         </li>
         <li>
