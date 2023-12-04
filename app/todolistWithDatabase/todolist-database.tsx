@@ -1,11 +1,9 @@
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
 import prisma from "@/prisma/db";
-import { Todo } from "@prisma/client";
-import { Trash2 } from "lucide-react";
+import { AddTodo } from "./add-todo";
+import { Todo } from "./todo";
 
 export const TodolistDatabase = async () => {
-  const todos: Todo[] = await prisma.todo.findMany();
+  const todos = await prisma.todo.findMany();
 
   return (
     <>
@@ -13,15 +11,12 @@ export const TodolistDatabase = async () => {
         Todolist Database
       </div>
       <div className="flex space-x-2 mt-6">
-        <Input /> <Button>Add</Button>
+        <AddTodo />
       </div>
       <div className="mt-4 space-y-2">
         {todos.map((todo) => (
           <div key={todo.id} className="flex space-x-2">
-            <Input value={todo.todo} />{" "}
-            <Button variant="destructive">
-              <Trash2 className="w-4 h-4" />
-            </Button>
+            <Todo id={todo.id} text={todo.todo} />
           </div>
         ))}
       </div>
