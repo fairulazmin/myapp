@@ -2,8 +2,7 @@
 
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { experimental_useFormStatus as useFormStatus } from "react-dom";
-import { useFormState } from "react-dom";
+import { useFormState, useFormStatus } from "react-dom";
 import { createTodo } from "./action";
 
 const initialState = { message: null };
@@ -15,10 +14,12 @@ export const AddTodo = () => {
   return (
     <>
       <form action={formAction}>
-        <Input />
-        <Button type="submit" disabled={pending}>
-          Add
-        </Button>
+        <div className="flex space-x-2">
+          <Input name="todo" />
+          <Button type="submit" disabled={pending}>
+            Add
+          </Button>
+        </div>
         <p>{state?.message}</p>
       </form>
     </>

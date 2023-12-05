@@ -10,9 +10,7 @@ export const TodolistDatabase = async () => {
       <div className="text-2xl font-semibold text-center">
         Todolist Database
       </div>
-      <div className="flex space-x-2 mt-6">
-        <AddTodo />
-      </div>
+      <AddTodo />
       <div className="mt-4 space-y-2">
         {todos.map((todo) => (
           <div key={todo.id} className="flex space-x-2">
