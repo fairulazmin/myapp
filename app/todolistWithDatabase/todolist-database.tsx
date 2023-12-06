@@ -13,7 +13,7 @@ export const TodolistDatabase = async () => {
       <AddTodo />
       <div className="mt-4 space-y-2">
         {todos.map((todo) => (
-          <div key={todo.id} className="flex space-x-2">
+          <div key={todo.id}>
             <Todo id={todo.id} text={todo.todo} />
           </div>
         ))}
