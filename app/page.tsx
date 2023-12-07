@@ -59,6 +59,9 @@ export default function Home() {
         <li>
           <Link href="/tasks">Table - Tasks</Link>
         </li>
+        <li>
+          <Link href="/recursiveAccordion">Recursive Accordion</Link>
+        </li>
       </ul>
     </div>
   );
