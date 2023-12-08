@@ -8,6 +8,9 @@ export default function Home() {
       </div>
       <ul className="text-xl">
         <li>
+          <Link href="/icon">Icon</Link>
+        </li>
+        <li>
           <Link href="/toast">Toast</Link>
         </li>
         <li>
@@ -61,6 +64,9 @@ export default function Home() {
         </li>
         <li>
           <Link href="/recursiveAccordion">Recursive Accordion</Link>
+        </li>
+        <li>
+          <Link href="/recursiveAccordion2">Recursive Accordion version 2</Link>
         </li>
       </ul>
     </div>

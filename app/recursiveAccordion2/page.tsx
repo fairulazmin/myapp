@@ -1,4 +1,3 @@
-import { RecursiveAccordion } from "./recursive-accordion";
 import SideNav from "./side-nav";
 
 const RecursiveAccordionPage = () => {
