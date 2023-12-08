@@ -66,7 +66,7 @@ export default function Home() {
           <Link href="/recursiveAccordion">Recursive Accordion</Link>
         </li>
         <li>
-          <Link href="/recursiveAccordion2">Recursive Accordion version 2</Link>
+          <Link href="/verticalStepper">Vertical Stepper</Link>
         </li>
       </ul>
     </div>
