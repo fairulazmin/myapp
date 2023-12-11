@@ -68,6 +68,9 @@ export default function Home() {
         <li>
           <Link href="/verticalStepper">Vertical Stepper</Link>
         </li>
+        <li>
+          <Link href="/readFile">Read file</Link>
+        </li>
       </ul>
     </div>
   );
