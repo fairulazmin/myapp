@@ -1,3 +1,167 @@
+## Docker
+### Docker file
+1. Create docker ignore file, name it **.dockerignore**
+2. Inside *.dockerignore* write:
+   ```docker
+   node_modules/
+   ```
+3. Create docker file, name it **Dockerfile**
+4. Inside *Dockerfile* write
+   ```docker
+   FROM node:18.19.0-alpine3.17
+   RUN addgroup app && adduser -S -G app app
+   RUN mkdir /app && chown app:app /app
+   USER app
+   WORKDIR /app
+   RUN mkdir data
+   COPY package*.json .
+   RUN npm install
+   COPY . .
+   EXPOSE 3000
+   CMD [“npm”, “start”]
+   ```
+5. Create docker file, name it **Dockerfile.prod**
+6. Inside *Dockerfile.prod* write
+   ```docker
+   # Step 1: Build stage
+   FROM node:18.19.0-alpine3.17 AS build-stage
+
+   WORKDIR /app
+   RUN mkdir data
+   COPY package*.json ./
+   RUN npm install
+   COPY . .
+   ENV REACT_APP_API_URL:http://localhost:3000
+   RUN npm run build
+
+   # STEP 2: Production
+   FROM nginx:1.12-alphine
+   COPY --from=build-stage /app/build /usr/share/nginx/html
+   EXPOSE 80
+   ENTRYPOINT ["nginx", "-g", "daemon-off;"]
+   ```
+7. Create docker compose file, name it **docker-compose.yml**
+8. Inside *docker-compose.yml* write
+   ``` yml
+   version: “3.8”
+   services:
+     web:
+       build: ./frontend
+       ports:
+         - 3000:3000
+     api:
+       build: ./backend
+       ports:
+         - 3001:3001
+       environment:
+         - DB_URL: mongodb://
+       volumes:
+         - ./backend:/app
+     db: 
+       image: mongo:4.0-xenial
+       ports:
+         - 27017:27017
+       volumes:
+         - vidly: /data/db
+     volumes:
+       vidly:
+   ```
+9. Create docker compose file, name it **docker-compose.prod.yml**
+10. Inside *docker-compose.prod.yml* write
+   ``` yml
+   version: “3.8”
+   services:
+     web:
+       build:
+         context: ./frontend
+         dockerfile: Dockerfile.prod
+       image: vidly_web:1
+       ports:
+         - 80:80
+       restart: unless-stopped
+     api:
+       build: ./backend
+       image: vidly_api:1
+       ports:
+         - 3001:3001
+       environment:
+         - DB_URL: mongodb://
+       restart: unless-stopped
+     db: 
+       image: mongo:4.0-xenial
+       ports:
+         - 27017:27017
+       volumes:
+         - vidly: /data/db
+       restart: unless-stopped
+     volumes:
+       vidly:
+   ```
+
+#### Docker Commands
+| Commands|  |
+| ------------ | ------------- |
+| docker build -t <image_name> | Build an Image from a Dockerfile |
+| docker rmi <image_name> | Delete an Image |
+| docker images | List local images |
+| docker image prune | Remove all unused images |
+| docker run --name <container_name> <image_name> | Create and run a container from an image, with a custom name |
+| docker run -p <host_port>:<container_port> <image_name> | Run a container with and publish a container’s port(s) to the host |
+| docker run -d <image_name> | Run a container in the background |
+| docker start *or* stop <container name *or* id> | Start or stop an existing container |
+| docker rm <container_name> | Remove a stopped container |
+| docker exec -it <container_name> sh | Open a shell inside a running container |
+| docker logs -f <container_name> | Fetch and follow the logs of a container |
+| docker ps | List currently running containers |
+| docker ps --all | List all docker containers (running and stopped) |
+| docker compose up | Create and start containers |
+| docker compose down | Stop and remove containers, networks |
+
+#### Docker Image Command
+| Commands|  |
+| ------------ | ------------- |
+| build | Build an image from a Dockerfile |
+| history | Show the history of an image|
+| import | Import the contents from a tarball to create a filesystem image |
+| inspect | Display detailed information on one or more images |
+| load | Load an image from a tar archive or STDIN |
+| ls | List images |
+| prune | Remove unused images |
+| pull | Download an image from a registry |
+| push	| Upload an image to a registry |
+| rm	|Remove one or more images |
+| save	| Save one or more images to a tar archive (streamed to STDOUT by default) |
+| tag | Create a tag TARGET_IMAGE that refers to SOURCE_IMAGE |
+
+#### Docker Container Command
+| Commands|  |
+| ------------ | ------------- |
+| attach | Attach local standard input, output, and error streams to a running container |
+| commit | Create a new image from a container's changes |
+| cp | Copy files/folders between a container and the local filesystem |
+| create | Create a new container |
+| diff | Inspect changes to files or directories on a container's filesystem |
+| exec | Execute a command in a running container |
+| export | Export a container's filesystem as a tar archive |
+| inspect | Display detailed information on one or more containers |
+| kill | Kill one or more running containers |
+| logs | Fetch the logs of a container |
+| ls | List containers |
+| pause | Pause all processes within one or more containers |
+| port | List port mappings or a specific mapping for the container |
+| prune | Remove all stopped containers |
+| rename | Rename a container |
+| restart | Restart one or more containers |
+| rm | Remove one or more containers |
+| run | Create and run a new container from an image |
+| start | Start one or more stopped containers|
+| stats | Display a live stream of container(s) resource usage statistics |
+| stop | Stop one or more running containers |
+| top | Display the running processes of a container |
+| unpause | Unpause all processes within one or more containers |
+| update | Update configuration of one or more containers |
+| wait | Block until one or more containers stop, then print their exit codes |
+
 ## Scroll top styling
 
 [hooks/use-scroll-top.tsx](https://github.com/AntonioErdeljac/notion-clone-tutorial/blob/master/hooks/use-scroll-top.tsx)
