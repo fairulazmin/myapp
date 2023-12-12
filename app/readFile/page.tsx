@@ -11,6 +11,7 @@ import {
   TableHead,
   TableRow,
 } from "@/components/ui/table";
+import { Button } from "@/components/ui/button";
 
 const FileUpload = () => {
   const [data, setData] = useState<any[]>([]);
@@ -46,12 +47,21 @@ const FileUpload = () => {
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     onDrop,
-    accept: { files: [".xls", ".xlsx", ".csv"] },
+    accept: {
+      "text/csv": [".csv"],
+      "application/vnd.ms-excel": [".xls"],
+      "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet": [
+        ".xlsx",
+      ],
+    },
   });
 
   return (
     <div className="container mx-auto">
-      <div {...getRootProps()} style={dropzoneStyle}>
+      <div
+        {...getRootProps()}
+        className="border-2 border-dashed text-center cursor-pointer p-5 rounded-sm"
+      >
         <input {...getInputProps()} />
         {isDragActive ? (
           <p>Drop the files here...</p>
@@ -59,6 +69,13 @@ const FileUpload = () => {
           <p>Drag and drop a file here, or click to select a file</p>
         )}
       </div>
+      <Button
+        className="my-6"
+        variant="destructive"
+        onClick={() => setData([])}
+      >
+        Reset
+      </Button>
       <h1>{data[0]}</h1>
       <Table className="text-center">
         <TableHeader>
@@ -80,14 +97,6 @@ const FileUpload = () => {
       </Table>
     </div>
   );
-};
-
-const dropzoneStyle: React.CSSProperties = {
-  border: "2px dashed #cccccc",
-  borderRadius: "4px",
-  padding: "20px",
-  textAlign: "center",
-  cursor: "pointer",
 };
 
 export default FileUpload;
