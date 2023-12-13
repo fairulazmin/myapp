@@ -401,3 +401,8 @@ export const metadata: Metadata = {
   ]
 }
 ```
+
+## Display JSON
+```tsx
+<pre>{JSON.stringify(data, null, 2)}</pre>
+```
