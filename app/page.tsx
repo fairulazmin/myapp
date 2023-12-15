@@ -71,6 +71,12 @@ export default function Home() {
         <li>
           <Link href="/readFile">Read file</Link>
         </li>
+        <li>
+          <Link href="/formProfile">Form Profile</Link>
+        </li>
+        <li>
+          <Link href="/formAccount">Form Account</Link>
+        </li>
       </ul>
     </div>
   );
