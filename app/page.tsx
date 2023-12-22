@@ -77,6 +77,9 @@ export default function Home() {
         <li>
           <Link href="/formAccount">Form Account</Link>
         </li>
+        <li>
+          <Link href="/formInput">Form Input</Link>
+        </li>
       </ul>
     </div>
   );
