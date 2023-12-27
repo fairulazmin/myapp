@@ -23,14 +23,14 @@ import {
 import { Button } from "@/components/ui/button";
 
 const MuFormSchema = z.object({
-  distribution: z.union([
-    z.literal("Normal"),
-    z.literal("T-distribution"),
-    z.literal("Rectangular"),
-    z.literal("U-shaped"),
-    z.literal("Triangular"),
+  distribution: z.enum([
+    "Normal",
+    "T-distribution",
+    "Rectangular",
+    "U-shaped",
+    "Triangular",
   ]),
-  type: z.union([z.literal("A"), z.literal("B")]),
+  type: z.enum(["A", "B"]),
   divisor: z.union([
     z.number(),
     z.literal("√3"),
@@ -55,6 +55,25 @@ export const MuForm = () => {
     console.log(data);
   };
 
+  const handleDivisorChange = (value: string) => {
+    console.log("HANDLE_DIVISOR_CHANGE: ", value);
+    switch (value) {
+      case "√3":
+        form.setValue("distribution", "Rectangular");
+        form.setValue("type", "B");
+        break;
+      case "√2":
+        form.setValue("distribution", "U-shaped");
+        form.setValue("type", "B");
+        break;
+      case "√6":
+        form.setValue("distribution", "Triangular");
+        form.setValue("type", "B");
+        break;
+    }
+    console.log("FORM: ", form);
+  };
+
   return (
     <>
       <h2 className="font-medium">MU Form</h2>
@@ -66,13 +85,16 @@ export const MuForm = () => {
               name="distribution"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Distribution type</FormLabel>
-                  <Select>
-                    <SelectTrigger className="w-40">
-                      <FormControl>
-                        <SelectValue {...field} />
-                      </FormControl>
-                    </SelectTrigger>
+                  <FormLabel>Probability Distribution</FormLabel>
+                  <Select
+                    onValueChange={field.onChange}
+                    defaultValue={field.value}
+                  >
+                    <FormControl>
+                      <SelectTrigger className="w-40">
+                        <SelectValue placeholder="Select distribution" />
+                      </SelectTrigger>
+                    </FormControl>
                     <SelectContent>
                       <SelectItem value="Normal">Normal</SelectItem>
                       <SelectItem value="T-distribution">
@@ -83,6 +105,62 @@ export const MuForm = () => {
                       <SelectItem value="Triangular">Triangular</SelectItem>
                     </SelectContent>
                   </Select>
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="type"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Distribution type</FormLabel>
+                  <Select
+                    onValueChange={field.onChange}
+                    defaultValue={field.value}
+                  >
+                    <FormControl>
+                      <SelectTrigger className="w-40">
+                        <SelectValue placeholder="Select type" />
+                      </SelectTrigger>
+                    </FormControl>
+                    <SelectContent>
+                      <SelectItem value="A">A</SelectItem>
+                      <SelectItem value="B">B</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="divisor"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Divisor</FormLabel>
+                  <Select
+                    onValueChange={(e) => {
+                      console.log("INVOKED");
+                      form.setValue((prevData) => ({
+                        ...prevData,
+                        ["divisor"]: e,
+                        ["type"]: "B",
+                      }));
+                      // form.setValue("type", "B", { shouldValidate: true });
+                      console.log("FIELD VALUE: ", field.value);
+                    }}
+                  >
+                    <FormControl>
+                      <SelectTrigger className="w-40">
+                        <SelectValue placeholder="Select divisor" />
+                      </SelectTrigger>
+                    </FormControl>
+                    <SelectContent>
+                      <SelectItem value="√3">√3</SelectItem>
+                      <SelectItem value="√2">√2</SelectItem>
+                      <SelectItem value="√6">√6</SelectItem>
+                    </SelectContent>
+                  </Select>
+                  <FormMessage />
                 </FormItem>
               )}
             />

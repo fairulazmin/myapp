@@ -80,6 +80,9 @@ export default function Home() {
         <li>
           <Link href="/formInput">Form Input</Link>
         </li>
+        <li>
+          <Link href="/tanstack-table">Tanstack Table</Link>
+        </li>
       </ul>
     </div>
   );
