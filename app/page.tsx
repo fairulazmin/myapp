@@ -69,7 +69,17 @@ export default function Home() {
           <Link href="/verticalStepper">Vertical Stepper</Link>
         </li>
         <li>
-          <Link href="/readFile">Read file</Link>
+          <Link href="/readFile">Read file (Drag and Drop)</Link>
+        </li>
+        <li>
+          <Link href="/readFile2">
+            Read file (xlsx SheetJS - Exp: President)
+          </Link>
+        </li>
+        <li>
+          <Link href="/readFile3">
+            Read file (xlsx SheetJS - Exp: Masterlist)
+          </Link>
         </li>
         <li>
           <Link href="/formProfile">Form Profile</Link>

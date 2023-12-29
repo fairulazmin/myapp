@@ -55,25 +55,6 @@ export const MuForm = () => {
     console.log(data);
   };
 
-  const handleDivisorChange = (value: string) => {
-    console.log("HANDLE_DIVISOR_CHANGE: ", value);
-    switch (value) {
-      case "√3":
-        form.setValue("distribution", "Rectangular");
-        form.setValue("type", "B");
-        break;
-      case "√2":
-        form.setValue("distribution", "U-shaped");
-        form.setValue("type", "B");
-        break;
-      case "√6":
-        form.setValue("distribution", "Triangular");
-        form.setValue("type", "B");
-        break;
-    }
-    console.log("FORM: ", form);
-  };
-
   return (
     <>
       <h2 className="font-medium">MU Form</h2>
@@ -87,8 +68,30 @@ export const MuForm = () => {
                 <FormItem>
                   <FormLabel>Probability Distribution</FormLabel>
                   <Select
-                    onValueChange={field.onChange}
-                    defaultValue={field.value}
+                    value={field.value}
+                    onValueChange={(e) => {
+                      field.onChange(e);
+                      switch (e) {
+                        case "Normal":
+                          form.setValue("type", "A");
+                          return;
+                        case "T-distribution":
+                          form.setValue("type", "A");
+                          return;
+                        case "Rectangular":
+                          form.setValue("type", "B");
+                          form.setValue("divisor", "√3");
+                          return;
+                        case "U-shaped":
+                          form.setValue("type", "B");
+                          form.setValue("divisor", "√2");
+                          return;
+                        case "Triangular":
+                          form.setValue("type", "B");
+                          form.setValue("divisor", "√6");
+                          return;
+                      }
+                    }}
                   >
                     <FormControl>
                       <SelectTrigger className="w-40">
@@ -114,10 +117,7 @@ export const MuForm = () => {
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Distribution type</FormLabel>
-                  <Select
-                    onValueChange={field.onChange}
-                    defaultValue={field.value}
-                  >
+                  <Select value={field.value} onValueChange={field.onChange}>
                     <FormControl>
                       <SelectTrigger className="w-40">
                         <SelectValue placeholder="Select type" />
@@ -138,15 +138,23 @@ export const MuForm = () => {
                 <FormItem>
                   <FormLabel>Divisor</FormLabel>
                   <Select
+                    value={field.value}
                     onValueChange={(e) => {
-                      console.log("INVOKED");
-                      form.setValue((prevData) => ({
-                        ...prevData,
-                        ["divisor"]: e,
-                        ["type"]: "B",
-                      }));
-                      // form.setValue("type", "B", { shouldValidate: true });
-                      console.log("FIELD VALUE: ", field.value);
+                      field.onChange(e);
+                      switch (e) {
+                        case "√3":
+                          form.setValue("type", "B");
+                          form.setValue("distribution", "Rectangular");
+                          return;
+                        case "√2":
+                          form.setValue("type", "B");
+                          form.setValue("distribution", "U-shaped");
+                          return;
+                        case "√6":
+                          form.setValue("type", "B");
+                          form.setValue("distribution", "Triangular");
+                          return;
+                      }
                     }}
                   >
                     <FormControl>
@@ -160,7 +168,6 @@ export const MuForm = () => {
                       <SelectItem value="√6">√6</SelectItem>
                     </SelectContent>
                   </Select>
-                  <FormMessage />
                 </FormItem>
               )}
             />

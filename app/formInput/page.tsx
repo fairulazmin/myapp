@@ -1,5 +1,6 @@
 import { SensitivityForm } from "./sensitivity-form";
 import { MuForm } from "./mu-form";
+import { CalibrationForm } from "./calibration-form";
 import { Separator } from "@/components/ui/separator";
 
 const FormInput = () => {
@@ -8,6 +9,8 @@ const FormInput = () => {
       <SensitivityForm />
       <Separator />
       <MuForm />
+      <Separator />
+      <CalibrationForm />
     </div>
   );
 };
