@@ -91,6 +91,9 @@ export default function Home() {
           <Link href="/formInput">Form Input</Link>
         </li>
         <li>
+          <Link href="/formSelect">Form Select</Link>
+        </li>
+        <li>
           <Link href="/tanstack-table">Tanstack Table</Link>
         </li>
       </ul>
