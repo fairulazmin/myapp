@@ -60,7 +60,7 @@ export default function Home() {
           <Link href="/payment">Table - Payment</Link>
         </li>
         <li>
-          <Link href="/tasks">Table - Tasks</Link>
+          <Link href="/table-column-filter">Table - Column filter</Link>
         </li>
         <li>
           <Link href="/recursiveAccordion">Recursive Accordion</Link>
