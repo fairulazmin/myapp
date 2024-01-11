@@ -20,7 +20,9 @@ const TableColumnFilterPage = () => {
 
   return (
     <div>
-      <h2>Table - Column filter</h2>
+      <h2 className="flex justify-center mb-6 text-2xl font-bold">
+        Table - Column filter
+      </h2>
       <DataTable columns={columns} data={data} />
     </div>
   );

@@ -43,11 +43,11 @@ export const DataTable = <TData, TValue>({
 
   const column = table.getColumn("sex");
   const selectedValues = new Set(column?.getFilterValue() as string[]);
-  console.log(selectedValues);
-  console.log("COLUMN FILTER STATE: ", table.getState().columnFilters);
+  // console.log(selectedValues);
+  // console.log("COLUMN FILTER STATE: ", table.getState().columnFilters);
 
   return (
-    <div>
+    <div className="max-w-4xl mx-auto space-y-4">
       <div className="flex space-x-2 justify-start items-center">
         <Button
           variant="outline"
@@ -62,7 +62,10 @@ export const DataTable = <TData, TValue>({
           Female
         </Button>
       </div>
-      <div className="max-w-4xl mx-auto rounded-md border">
+      <div>
+        <pre>{JSON.stringify(table.getState().columnFilters)}</pre>
+      </div>
+      <div className="rounded-md border">
         <Table>
           <TableHeader className="bg-secondary">
             {table.getHeaderGroups().map((headerGroup) => (

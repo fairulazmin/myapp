@@ -23,13 +23,15 @@ export const columns: ColumnDef<User>[] = [
     cell: ({ row }) => (
       <span className="capitalize">{row.getValue("sex")}</span>
     ),
-    // filterFn: (row, id, value) => {
-    //   return value.arrIncludes(row.getValue(id));
-    // },
+    filterFn: (row, id, value) => {
+      console.log(row, id, value);
+      return true;
+    },
   },
   {
     accessorKey: "company",
     header: "Company",
+    cell: ({ getValue }) => (getValue() as string).toUpperCase(),
   },
   {
     accessorKey: "dob",
