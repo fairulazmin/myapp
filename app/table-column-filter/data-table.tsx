@@ -6,6 +6,8 @@ import {
   ColumnFiltersState,
   getCoreRowModel,
   getFilteredRowModel,
+  getFacetedRowModel,
+  getFacetedUniqueValues,
   useReactTable,
 } from "@tanstack/react-table";
 import {
@@ -35,35 +37,52 @@ export const DataTable = <TData, TValue>({
     data,
     getCoreRowModel: getCoreRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
+    getFacetedRowModel: getFacetedRowModel(),
+    getFacetedUniqueValues: getFacetedUniqueValues(),
+    onColumnFiltersChange: setColumnFilters,
     state: {
       columnFilters,
     },
-    onColumnFiltersChange: setColumnFilters,
   });
 
-  const column = table.getColumn("sex");
-  const selectedValues = new Set(column?.getFilterValue() as string[]);
-  // console.log(selectedValues);
-  // console.log("COLUMN FILTER STATE: ", table.getState().columnFilters);
+  const selectedSexValues = new Set(table.getState().columnFilters
+
+  const handleFilter = (gender: string) => {selectedSexValues.has(gender) ? selectedSexValues.delete(gender) : selectedSexValues.add(gender)
+      table.getColumn("sex")?.setFilterValue(selectedSexValues as string[]) 
+  }
 
   return (
     <div className="max-w-4xl mx-auto space-y-4">
       <div className="flex space-x-2 justify-start items-center">
         <Button
           variant="outline"
-          onClick={() => column?.setFilterValue("male")}
+          onClick={() => console.log(table.getColumn("sex")?.getFilterValue())}
+        >
+          All
+        </Button>
+        <Button
+          variant="outline"
+          onClick={() => handleFilter("male")}
         >
           Male
         </Button>
         <Button
           variant="outline"
-          onClick={() => column?.setFilterValue("female")}
+          onClick={() => handleFilter("female")
+          }
         >
           Female
         </Button>
       </div>
       <div>
-        <pre>{JSON.stringify(table.getState().columnFilters)}</pre>
+        {/* <pre> */}
+        {/*   {JSON.stringify( */}
+        {/*     table.getColumn("email")?.getFacetedUniqueValues(), */}
+        {/*     null, */}
+        {/*     2, */}
+        {/*   )} */}
+        {/* </pre> */}
+        <pre>{JSON.stringify(table.getState().columnFilters, null, 2)}</pre>
       </div>
       <div className="rounded-md border">
         <Table>

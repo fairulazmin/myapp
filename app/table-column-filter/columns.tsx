@@ -12,6 +12,7 @@ export const columns: ColumnDef<User>[] = [
   {
     accessorKey: "email",
     header: "Email",
+    filterFn: (row, id, value) => value.includes(row.getValue(id)),
   },
   {
     accessorKey: "fullname",
@@ -23,10 +24,7 @@ export const columns: ColumnDef<User>[] = [
     cell: ({ row }) => (
       <span className="capitalize">{row.getValue("sex")}</span>
     ),
-    filterFn: (row, id, value) => {
-      console.log(row, id, value);
-      return true;
-    },
+    filterFn: (row, id, value) => value.includes(row.getValue(id)),
   },
   {
     accessorKey: "company",
