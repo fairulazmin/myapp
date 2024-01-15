@@ -1,3 +1,5 @@
+"use client";
+
 import { MultiSelect } from "./multi-select";
 import { Select } from "./select";
 import {
@@ -57,7 +59,7 @@ const priorities = [
   },
 ];
 
-const MultiSelectPage = () => {
+const MultiSelectPage = async () => {
   return (
     <div className="container space-y-6">
       <h2 className="text-2xl font-semibold text-center">Multi select</h2>
