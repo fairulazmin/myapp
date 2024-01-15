@@ -31,6 +31,9 @@ export default function Home() {
         <li>
           <Link href="/inputZod">InputZod</Link>
         </li>
+        <li>
+          <Link href="/multi-select">Multi select</Link>
+        </li>
         <Link href="/counter">Counter</Link>
         <li>
           <Link href="/counters">Counters</Link>
@@ -57,10 +60,13 @@ export default function Home() {
           <Link href="/acc_calb">Accelerometer Calibration</Link>
         </li>
         <li>
-          <Link href="/payment">Table - Payment</Link>
+          <Link href="/table-column-filter">Table - Column filter</Link>
         </li>
         <li>
-          <Link href="/table-column-filter">Table - Column filter</Link>
+          <Link href="/table-column-filter2">Table - Column filter 2</Link>
+        </li>
+        <li>
+          <Link href="/table-payment">Table - Payment</Link>
         </li>
         <li>
           <Link href="/recursiveAccordion">Recursive Accordion</Link>
@@ -92,9 +98,6 @@ export default function Home() {
         </li>
         <li>
           <Link href="/formSelect">Form Select</Link>
-        </li>
-        <li>
-          <Link href="/tanstack-table">Tanstack Table</Link>
         </li>
       </ul>
     </div>

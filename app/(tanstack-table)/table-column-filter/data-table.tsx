@@ -45,44 +45,73 @@ export const DataTable = <TData, TValue>({
     },
   });
 
-  const selectedSexValues = new Set(table.getState().columnFilters
+  const selectedSexValues = new Set(
+    table.getColumn("sex")?.getFilterValue() as string[],
+  );
 
-  const handleFilter = (gender: string) => {selectedSexValues.has(gender) ? selectedSexValues.delete(gender) : selectedSexValues.add(gender)
-      table.getColumn("sex")?.setFilterValue(selectedSexValues as string[]) 
-  }
+  const handleFilter = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    const selected = e.currentTarget.value;
+    switch (selected) {
+      case "male":
+      case "female":
+        selectedSexValues.has(selected)
+          ? selectedSexValues.delete(selected)
+          : selectedSexValues.add(selected);
+
+        selectedSexValues.size
+          ? table.getColumn("sex")?.setFilterValue([...selectedSexValues])
+          : table.getColumn("sex")?.setFilterValue(undefined);
+        break;
+      case "all":
+        selectedSexValues.size > 0 || selectedSexValues.size < 2
+          ? table.getColumn("sex")?.setFilterValue(["male", "female"])
+          : table.getColumn("sex")?.setFilterValue(undefined);
+        break;
+    }
+  };
 
   return (
     <div className="max-w-4xl mx-auto space-y-4">
       <div className="flex space-x-2 justify-start items-center">
         <Button
-          variant="outline"
-          onClick={() => console.log(table.getColumn("sex")?.getFilterValue())}
+          variant={
+            selectedSexValues.size === 2 || selectedSexValues.size === 0
+              ? "default"
+              : "outline"
+          }
+          value="all"
+          onClick={handleFilter}
         >
           All
         </Button>
         <Button
-          variant="outline"
-          onClick={() => handleFilter("male")}
+          variant={selectedSexValues.has("male") ? "default" : "outline"}
+          value="male"
+          onClick={handleFilter}
         >
           Male
         </Button>
         <Button
-          variant="outline"
-          onClick={() => handleFilter("female")
-          }
+          variant={selectedSexValues.has("female") ? "default" : "outline"}
+          value="female"
+          onClick={handleFilter}
         >
           Female
         </Button>
       </div>
-      <div>
-        {/* <pre> */}
-        {/*   {JSON.stringify( */}
-        {/*     table.getColumn("email")?.getFacetedUniqueValues(), */}
-        {/*     null, */}
-        {/*     2, */}
-        {/*   )} */}
-        {/* </pre> */}
-        <pre>{JSON.stringify(table.getState().columnFilters, null, 2)}</pre>
+      <div className="p-4 bg-indigo-100 rounded-xl">
+        <pre>
+          {`Table.getColumn("sex")?.getFilterValue() => `}
+          {JSON.stringify(table.getColumn("sex")?.getFilterValue(), null, 2)}
+        </pre>
+        <pre>
+          {`Table.getState().columnFilters => `}
+          {JSON.stringify(table.getState().columnFilters, null, 2)}
+        </pre>
+        <pre>
+          {`Table.getFilteredRowModel().rows.length => `}
+          {table.getFilteredRowModel().rows.length} found
+        </pre>
       </div>
       <div className="rounded-md border">
         <Table>
