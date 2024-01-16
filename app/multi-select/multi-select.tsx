@@ -55,7 +55,7 @@ export const MultiSelect = ({ title, options }: MultiSelectProps) => {
                   onClick={() => {
                     selectedValues.includes(value)
                       ? setSelectedValues((prev) =>
-                          prev.filter((val) => val === value),
+                          prev.filter((val) => val !== value),
                         )
                       : setSelectedValues((prev) => [...prev, value]);
                   }}

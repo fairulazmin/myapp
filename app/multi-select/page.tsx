@@ -63,8 +63,10 @@ const MultiSelectPage = async () => {
   return (
     <div className="container space-y-6">
       <h2 className="text-2xl font-semibold text-center">Multi select</h2>
-      <MultiSelect title="Status" options={statuses} />
-      {/* <MultiSelect title="Priority" options={priorities} /> */}
+      <div className="p-6 rounded-lg bg-sky-100 shadow-md space-y-4">
+        <MultiSelect title="Status" options={statuses} />
+        <MultiSelect title="Priority" options={priorities} />
+      </div>
       <Select title="Status" options={statuses} />
       <Select title="Priority" options={priorities} />
     </div>
