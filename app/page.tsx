@@ -69,6 +69,9 @@ export default function Home() {
           <Link href="/table-payment">Table - Payment</Link>
         </li>
         <li>
+          <Link href="/nested-table">Table - Nested</Link>
+        </li>
+        <li>
           <Link href="/recursiveAccordion">Recursive Accordion</Link>
         </li>
         <li>
