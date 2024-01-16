@@ -1,35 +1,40 @@
 "use client";
 
 import { ColumnDef } from "@tanstack/react-table";
+import { DataTableColumnHeader } from "./data-table-column-header";
 import { User } from "./page";
 import { format } from "date-fns";
 
 export const columns: ColumnDef<User>[] = [
   {
     accessorKey: "id",
-    header: "Id",
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title="Id" />
+    ),
   },
   {
     accessorKey: "name",
     header: "Name",
   },
   {
-    // accessorKey: "country",
+    accessorKey: "country",
     accessorFn: (row) => row.address.country,
-    header: "Country",
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title="Country" />
+    ),
   },
   {
     accessorKey: "dob",
-    header: "Birthday",
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title="Birthday" />
+    ),
     cell: (row) => format(row.getValue() as Date, "dd MMM yyyy"),
   },
   {
-    // accessorKey: "name",
-    accessorFn: (row) => row.children,
-    header: "Children",
-    cell: (row) =>
-      row
-        .getValue()
-        .map((child, idx: number) => <div>{`${++idx}) ${child.name}`}</div>),
+    accessorKey: "child",
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title="Child" />
+    ),
+    accessorFn: (row) => row.children[0].name,
   },
 ];
