@@ -102,6 +102,9 @@ export default function Home() {
         <li>
           <Link href="/formSelect">Form Select</Link>
         </li>
+        <li>
+          <Link href="/lodash-difference">Lodash Difference</Link>
+        </li>
       </ul>
     </div>
   );
