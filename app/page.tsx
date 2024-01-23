@@ -105,6 +105,9 @@ export default function Home() {
         <li>
           <Link href="/lodash-difference">Lodash Difference</Link>
         </li>
+        <li>
+          <Link href="/print-table">Print Table</Link>
+        </li>
       </ul>
     </div>
   );
