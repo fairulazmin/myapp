@@ -32,6 +32,9 @@ export default function Home() {
           <Link href="/inputZod">InputZod</Link>
         </li>
         <li>
+          <Link href="/useState">useState</Link>
+        </li>
+        <li>
           <Link href="/multi-select">Multi select</Link>
         </li>
         <Link href="/counter">Counter</Link>
