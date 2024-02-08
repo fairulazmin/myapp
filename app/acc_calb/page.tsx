@@ -32,7 +32,7 @@ export default function SettingsLayout() {
           <aside className="-mx-4 lg:w-1/5">
             <SidebarNav items={sidebarNavItems} />
           </aside>
-          <div className="flex-1 lg:max-w-2xl">
+          <div className="flex-1 lg:max-w-4xl">
             <AccCalb />
           </div>
         </div>
