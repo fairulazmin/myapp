@@ -32,6 +32,9 @@ export default function Home() {
           <Link href="/inputZod">InputZod</Link>
         </li>
         <li>
+          <Link href="/inputTypeNumber">Input Type Number</Link>
+        </li>
+        <li>
           <Link href="/useState">useState</Link>
         </li>
         <li>
@@ -110,6 +113,9 @@ export default function Home() {
         </li>
         <li>
           <Link href="/print-table">Print Table</Link>
+        </li>
+        <li>
+          <Link href="/generic-combobox">Generic - Combobox</Link>
         </li>
       </ul>
     </div>
