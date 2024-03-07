@@ -15,49 +15,58 @@ import {
   SelectValue,
   SelectContent,
 } from "@/components/ui/select";
-import { Input } from "@/components/ui/input";
+import { cn } from "@/lib/utils";
 
 export type FieldValues = Record<string, any>;
 
 interface Option {
   value: string;
+  label?: string;
 }
 
 interface SelectFormProps<T extends Option, TFieldValues extends FieldValues> {
   form: UseFormReturn<TFieldValues>;
   name: Path<TFieldValues>;
-  placeholder: string;
+  alignLabel?: "top" | "left";
+  label?: string;
+  placeholder?: string;
   options: T[];
 }
 
 export const SelectForm = <T extends Option, TFieldValues extends FieldValues>({
   form,
   name,
-  placeholder,
+  label = name,
+  alignLabel = "top",
+  placeholder = "",
   options,
 }: SelectFormProps<T, TFieldValues>) => (
   <FormField
     control={form.control}
     name={name}
     render={({ field }) => (
-      <FormItem>
+      <FormItem
+        className={cn(alignLabel === "left" && "grid grid-cols-2 items-center")}
+      >
         <FormLabel>
-          <span className="capitalize">{name}</span>
+          <span className="capitalize">{label}</span>
         </FormLabel>
-        <Select onValueChange={field.onChange} defaultValue={field.value}>
-          <FormControl>
-            <SelectTrigger>
-              <SelectValue placeholder={placeholder} />
-            </SelectTrigger>
-          </FormControl>
-          <SelectContent>
-            {options.map((option, idx) => (
-              <SelectItem key={idx} value={option.value}>
-                {option.value}
-              </SelectItem>
-            ))}
-          </SelectContent>
-        </Select>
+        <div className="h-full">
+          <Select onValueChange={field.onChange} defaultValue={field.value}>
+            <FormControl>
+              <SelectTrigger className="">
+                <SelectValue placeholder={placeholder} />
+              </SelectTrigger>
+            </FormControl>
+            <SelectContent>
+              {options.map((option, idx) => (
+                <SelectItem key={idx} value={option.value}>
+                  {option.label || option.value}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+        </div>
       </FormItem>
     )}
   />

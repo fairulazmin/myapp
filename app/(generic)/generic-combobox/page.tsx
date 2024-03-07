@@ -1,6 +1,8 @@
-import z from "zod";
 import { Combobox } from "./combobox";
-import { AccelerometerForm } from "./accelerometer-form";
+import {
+  AccelerometerForm,
+  AccelerometerFormValues,
+} from "./accelerometer-form";
 
 const accelerometers: AccelerometerFormValues[] = [
   {
