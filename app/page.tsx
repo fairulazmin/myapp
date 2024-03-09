@@ -115,7 +115,7 @@ export default function Home() {
           <Link href="/print-table">Print Table</Link>
         </li>
         <li>
-          <Link href="/generic-combobox">Generic - Combobox</Link>
+          <Link href="/generic-form">Generic - form</Link>
         </li>
       </ul>
     </div>

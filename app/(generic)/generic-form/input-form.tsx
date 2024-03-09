@@ -19,6 +19,7 @@ interface InputFormProps<TFieldValues extends FieldValues> {
   alignLabel?: "top" | "left";
   type?: "number" | "text";
   placeholder?: string;
+  unit?: string | React.ReactNode;
 }
 
 export const InputForm = <TFieldValues extends FieldValues>({
@@ -28,6 +29,7 @@ export const InputForm = <TFieldValues extends FieldValues>({
   alignLabel = "top",
   type = "text",
   placeholder = "",
+  unit,
 }: InputFormProps<TFieldValues>) => (
   <FormField
     control={form.control}
@@ -41,16 +43,25 @@ export const InputForm = <TFieldValues extends FieldValues>({
         </FormLabel>
         <div className="h-full">
           <FormControl>
-            <Input
-              {...field}
-              placeholder={placeholder}
-              type={type}
-              onChange={(e) => {
-                type === "text"
-                  ? field.onChange(e)
-                  : field.onChange(e.target.valueAsNumber);
-              }}
-            />
+            <div className="flex items-center">
+              <Input
+                {...field}
+                placeholder={placeholder}
+                type={type}
+                onChange={(e) => {
+                  type === "text"
+                    ? field.onChange(e)
+                    : field.onChange(e.target.valueAsNumber);
+                }}
+                className={cn(
+                  type === "number" &&
+                    "[-moz-appearance:_textfield] [&::-webkit-inner-spin-button]:m-0 [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:m-0 [&::-webkit-outer-spin-button]:appearance-none",
+                )}
+              />
+              {unit && (
+                <div className="text-sm ml-2 whitespace-nowrap">{unit}</div>
+              )}
+            </div>
           </FormControl>
         </div>
       </FormItem>

@@ -31,6 +31,7 @@ interface SelectFormProps<T extends Option, TFieldValues extends FieldValues> {
   label?: string;
   placeholder?: string;
   options: T[];
+  unit?: string | React.ReactNode;
 }
 
 export const SelectForm = <T extends Option, TFieldValues extends FieldValues>({
@@ -40,6 +41,7 @@ export const SelectForm = <T extends Option, TFieldValues extends FieldValues>({
   alignLabel = "top",
   placeholder = "",
   options,
+  unit,
 }: SelectFormProps<T, TFieldValues>) => (
   <FormField
     control={form.control}
@@ -52,20 +54,25 @@ export const SelectForm = <T extends Option, TFieldValues extends FieldValues>({
           <span className="capitalize">{label}</span>
         </FormLabel>
         <div className="h-full">
-          <Select onValueChange={field.onChange} defaultValue={field.value}>
-            <FormControl>
-              <SelectTrigger className="">
-                <SelectValue placeholder={placeholder} />
-              </SelectTrigger>
-            </FormControl>
-            <SelectContent>
-              {options.map((option, idx) => (
-                <SelectItem key={idx} value={option.value}>
-                  {option.label || option.value}
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
+          <div className="flex items-center">
+            <Select onValueChange={field.onChange} defaultValue={field.value}>
+              <FormControl>
+                <SelectTrigger className="">
+                  <SelectValue placeholder={placeholder} />
+                </SelectTrigger>
+              </FormControl>
+              <SelectContent>
+                {options.map((option, idx) => (
+                  <SelectItem key={idx} value={option.value}>
+                    {option.label || option.value}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+            {unit && (
+              <div className="text-sm ml-2 whitespace-nowrap">{unit}</div>
+            )}
+          </div>
         </div>
       </FormItem>
     )}
