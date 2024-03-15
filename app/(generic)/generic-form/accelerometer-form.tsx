@@ -1,10 +1,10 @@
 "use client";
 
-import { useForm, useWatch } from "react-hook-form";
+import { useFieldArray, useForm, useWatch } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import z from "zod";
 
-import { Form } from "@/components/ui/form";
+import { Form, FormField } from "@/components/ui/form";
 import { Button } from "@/components/ui/button";
 import { InputForm } from "./input-form";
 import { SelectForm } from "./select-form";
@@ -18,9 +18,16 @@ const accelerometerSchema = z.object({
   temperature: z.number(),
   humidity: z.number(),
   manufacturer: z.string(),
-  sensitivity: z.string(),
   calb_date: z.date(),
   calb_due: z.date(),
+  sensitivity: z.string(),
+  calibrations: z.array(
+    z.object({
+      sensitivity: z.number().or(z.literal("")),
+      dB: z.number().or(z.literal("")),
+      dev: z.number().or(z.literal("")),
+    }),
+  ),
   // model: z.string(),
   // accuracy: z.string(),
   // range: z.string(),
@@ -38,10 +45,11 @@ export type AccelerometerFormValues = z.infer<typeof accelerometerSchema>;
 export const AccelerometerForm = () => {
   const form = useForm<AccelerometerFormValues>({
     resolver: zodResolver(accelerometerSchema),
-    // defaultValues: {
-    //   createdAt: "",
-    //   updatedAt: "",
-    // },
+    defaultValues: {
+      //   createdAt: "",
+      //   updatedAt: "",
+      calibrations: [{ sensitivity: 100, dev: 0, dB: 0 }],
+    },
   });
 
   const newEquipment = useWatch({
@@ -62,11 +70,14 @@ export const AccelerometerForm = () => {
     form.setValue("equipment", `${newSerial}`);
   }, [newSerial]);
 
-  console.log("render");
-
   const onSubmit = (values: AccelerometerFormValues) => {
     console.log(values);
   };
+
+  const { fields, append } = useFieldArray({
+    name: "calibrations",
+    control: form.control,
+  });
 
   return (
     <div>
@@ -149,6 +160,41 @@ export const AccelerometerForm = () => {
                 alignLabel="left"
               />
             </div>
+          </div>
+          <div>
+            {fields.map((field, index) => (
+              <div
+                key={field.id}
+                className="grid grid-cols-3 space-x-3 [&_*]:text-center"
+              >
+                <InputForm
+                  form={form}
+                  name={`calibrations.${index}.sensitivity`}
+                  label="Sensitivity"
+                  type="number"
+                />
+                <InputForm
+                  form={form}
+                  name={`calibrations.${index}.dev`}
+                  label="Deviation"
+                  type="number"
+                />
+                <InputForm
+                  form={form}
+                  name={`calibrations.${index}.dB`}
+                  label="Decibel"
+                  type="number"
+                />
+              </div>
+            ))}
+            <Button
+              type="button"
+              onClick={() => append({ sensitivity: "", dev: "", dB: "" })}
+              className="mt-2"
+              variant="outline"
+            >
+              Add
+            </Button>
           </div>
           <Button type="submit">Submit</Button>
         </form>

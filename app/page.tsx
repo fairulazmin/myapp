@@ -35,6 +35,9 @@ export default function Home() {
           <Link href="/inputTypeNumber">Input Type Number</Link>
         </li>
         <li>
+          <Link href="/tabs">Tabs</Link>
+        </li>
+        <li>
           <Link href="/useState">useState</Link>
         </li>
         <li>
