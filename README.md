@@ -406,3 +406,35 @@ export const metadata: Metadata = {
 ```tsx
 <pre>{JSON.stringify(data, null, 2)}</pre>
 ```
+
+## Date time & currency formating
+### Relative date
+```tsx
+import { formatDistanceToNowStrict ) from "date-fns"
+
+export const relativeDate = (from: Date) => {
+  return formatDistanceToNowStrict (from, { addSuffix: true });
+}
+```
+
+### Currency
+```tsx
+const CURRENCY_FORMATTER = new Intl.NumberFormat ("en-MY", {
+  currency: "MYR",
+  style: "currency",
+  minimumFractionDigits: 0
+})
+
+export const formatCurrency = (amount: number) => {
+  return CURRENCY_FORMATTER.format(amount)
+}
+```
+
+### Number
+```tsx
+const NUMBER_FORMATTER = new Intl.NumberFormat ("en-MY")
+
+export const formatNumber = (number: number) => {
+  return NUMBER_FORMATTER.format(number)
+}
+```
