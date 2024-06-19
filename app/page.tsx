@@ -120,6 +120,9 @@ export default function Home() {
         <li>
           <Link href="/generic-form">Generic - form</Link>
         </li>
+        <li>
+          <Link href="/generic-input">Generic - input</Link>
+        </li>
       </ul>
     </div>
   );
