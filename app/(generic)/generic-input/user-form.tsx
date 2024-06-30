@@ -22,15 +22,17 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Button } from "@/components/ui/button";
-import { InputForm, InputFormWithRef } from "./input-form";
+import { InputForm, InputForm2, InputForm3, InputForm4 } from "./input-form";
+import { InputForm5 } from "./input-form5";
+import { InputForm6 } from "./input-form6";
 
 const userFormSchema = z.object({
   firstName: z.string().min(2),
   lastName: z.string().min(2),
-  // spouse: z.string().min(2),
-  // noChildren: z.coerce.number(),
-  // company: z.string().min(2),
-  // sex: z.enum(["male", "female"]),
+  spouse: z.string().min(2),
+  noChildren: z.coerce.number(),
+  company: z.string().min(2),
+  sex: z.enum(["male", "female"]),
 });
 
 type UserFormValues = z.infer<typeof userFormSchema>;
@@ -59,12 +61,53 @@ export const UserForm = () => {
               control={form.control}
               name="firstName"
               label="First Name"
+              className="bg-pink-100"
+              type="number"
+              onClick={() => console.log("Hello")}
             />
-            <InputFormWithRef
+            <InputForm2
               control={form.control}
               name="lastName"
               label="Last Name"
+              className="bg-indigo-100"
+              type="number"
+              onClick={() => console.log("Hello")}
+            />
+            <InputForm3
+              control={form.control}
+              name="spouse"
+              className="bg-yellow-100"
+              onClick={() => console.log("Bello")}
+              type="number"
+              label="Spouse"
               ref={ref}
+            />
+            <InputForm4
+              control={form.control}
+              name="noChildren"
+              className="bg-gray-100"
+              onClick={() => console.log("World")}
+              type="number"
+              label="No of Children"
+              // ref={ref}
+            />
+            <InputForm5
+              control={form.control}
+              name="company"
+              className="bg-gray-100"
+              onClick={() => console.log("World")}
+              type="number"
+              label="Company"
+              ref={ref}
+            />
+            <InputForm6
+              control={form.control}
+              name="sex"
+              className="bg-gray-100"
+              onClick={() => console.log("World")}
+              type="number"
+              label="Sex"
+              // ref={ref}
             />
             <Button type="submit" className="w-full" variant="secondary">
               Submit

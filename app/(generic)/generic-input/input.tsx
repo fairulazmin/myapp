@@ -21,10 +21,7 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
 type InputProps2<HTMLInputElement> =
   React.InputHTMLAttributes<HTMLInputElement>;
 
-export const Input2 = React.forwardRef<
-  HTMLInputElement,
-  InputProps2<HTMLInputElement>
->(
+export const Input2 = React.forwardRef(
   (
     { className, type, ...props }: InputProps2<HTMLInputElement>,
     ref: React.ForwardedRef<HTMLInputElement>,
