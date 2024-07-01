@@ -5,6 +5,12 @@ import { FormField, FormItem } from "@/components/ui/form";
 import { FormControl, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 
+type FixedForwardRef = <T, P = {}>(
+  render: (props: P, ref: React.Ref<T>) => React.ReactElement | null,
+) => (props: P & React.RefAttributes<T>) => React.ReactElement | null;
+
+const fixedForwardRef = React.forwardRef as FixedForwardRef;
+
 type InnerProps<T extends FieldValues, P extends FieldPath<T>> = {
   control: Control<T>;
   name: P;
@@ -32,14 +38,4 @@ const InnerForm = <T extends FieldValues, P extends FieldPath<T>>(
   );
 };
 
-export const InputForm5 = React.forwardRef(InnerForm);
-
-// type FormWithRefProps<
-//   T extends FieldValues,
-//   P extends FieldPath<T>,
-// > = InnerProps<T, P> & { ref: React.Ref<HTMLInputElement> };
-
-// export const InputForm5 = <T extends FieldValues, P extends FieldPath<T>>({
-//   ref,
-//   ...props
-// }: FormWithRefProps<T, P>) => <FormWithRef ref={ref} {...props} />;
+export const InputForm5 = fixedForwardRef(InnerForm);

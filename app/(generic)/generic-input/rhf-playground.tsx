@@ -1,5 +1,14 @@
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Control, useForm, UseControllerProps } from "react-hook-form";
+import {
+  Control,
+  useForm,
+  UseControllerProps,
+  useController,
+  useWatch,
+  FieldPath,
+  Controller,
+  FieldPathValues,
+} from "react-hook-form";
 import { z } from "zod";
 
 const userFormSchema = z.object({
@@ -22,6 +31,10 @@ const form = useForm<UserFormValues>({
 
 // type Control<TFieldValues extends FieldValues = FieldValues, TContext = any>
 const control: Control<UserFormValues> = form.control;
+const name: FieldPath<UserFormValues> = "firstName";
 
-// type UseControllerProps<TFieldValues extends FieldValues = FieldValues, TName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>>
-const controlProps: UseControllerProps = control;
+// useController<FieldValues, string>(props: UseControllerProps<FieldValues, string>): UseControllerReturn<FieldValues, string>
+const controller = useController<UserFormValues>({
+  name: "firstName",
+  control: control,
+});

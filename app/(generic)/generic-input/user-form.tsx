@@ -98,7 +98,7 @@ export const UserForm = () => {
               onClick={() => console.log("World")}
               type="number"
               label="Company"
-              ref={ref}
+              // ref={ref}
             />
             <InputForm6
               control={form.control}
