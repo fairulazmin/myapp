@@ -1,24 +1,20 @@
 import React from "react";
-import { FieldValues, UseControllerProps } from "react-hook-form";
+import { Control, FieldPath, FieldValues } from "react-hook-form";
 
+import { fixedForwardRef } from "@/lib/utils";
 import { FormField, FormItem } from "@/components/ui/form";
 import { FormControl, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 
-// declare module "react" {
-//   function forwardRef<T, P = {}>(
-//     render: (props: P, ref: React.Ref<T>) => React.ReactElement | null,
-//   ): (props: P & React.RefAttributes<T>) => React.ReactElement | null;
-// }
+type Props<T extends FieldValues, P extends FieldPath<T>> = {
+  control: Control<T>;
+  name: P;
+  label: string;
+} & React.ComponentPropsWithRef<"input">;
 
-type Props6<T extends FieldValues> = UseControllerProps<T> &
-  React.ComponentPropsWithoutRef<"input"> & {
-    label: string;
-  };
-
-export const InputForm6 = React.forwardRef(
-  <T extends FieldValues>(
-    { control, name, label, ...props }: Props6<T>,
+export const FormInput = fixedForwardRef(
+  <T extends FieldValues, P extends FieldPath<T>>(
+    { control, name, label, ...props }: Props<T, P>,
     ref: React.ForwardedRef<HTMLInputElement>,
   ) => {
     return (

@@ -22,9 +22,9 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Button } from "@/components/ui/button";
-import { FormInput } from "./form-input";
-import { FormInput as FormInput2 } from "./form-input2";
-import { FormInput as FormInput3 } from "./form-input-mysa";
+import { InputForm, InputForm2, InputForm3, InputForm4 } from "./input-form";
+import { InputForm5 } from "./input-form5";
+import { InputForm6 } from "./input-form6";
 
 const userFormSchema = z.object({
   firstName: z.string().min(2),
@@ -54,21 +54,57 @@ export const UserForm = () => {
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)}>
           <div className="space-y-3 max-w-md mx-auto">
-            <FormInput
+            <FormField
               control={form.control}
               name="firstName"
-              label="First Name"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>First Name</FormLabel>
+                  <FormControl>
+                    <Input {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
             />
-            <FormInput2
+            <FormField
               control={form.control}
               name="lastName"
-              label="Last Name"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Last Name</FormLabel>
+                  <FormControl>
+                    <Input {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
             />
-            <FormInput3 control={form.control} name="spouse" label="spouse" />
-            <FormInput
+            <FormField
+              control={form.control}
+              name="spouse"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Spouse</FormLabel>
+                  <FormControl>
+                    <Input {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
               control={form.control}
               name="maidenName"
-              label="Maiden Name"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Maiden Name</FormLabel>
+                  <FormControl>
+                    <Input {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
             />
             <FormField
               control={form.control}

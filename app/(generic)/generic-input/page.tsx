@@ -9,14 +9,6 @@ const GenericInputPage = () => {
   return (
     <div className="container space-y-3">
       <h1>Generic Input Page </h1>
-      <Input placeholder="First name" className="bg-blue-100" />
-      <Input2 placeholder="Last name" className="bg-red-100" />
-
-      {/* Will caused an error */}
-      {/* <InputThree /> */}
-
-      <Input3 placeholder="Company" className="bg-sky-100" />
-      <Input4 placeholder="Address" className="bg-gray-100" />
       <UserForm />
     </div>
   );
