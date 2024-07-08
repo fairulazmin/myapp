@@ -5,6 +5,7 @@ import {
   FormField,
   FormLabel,
   FormControl,
+  FormMessage,
 } from "@/components/ui/form";
 import {
   Select,
@@ -13,87 +14,74 @@ import {
   SelectValue,
   SelectContent,
 } from "@/components/ui/select";
-import { fixedForwardRef } from "@/lib/utils";
 
-type Option = string & { label: string; value: string };
+type StrOption = string;
 
-type FormSelectProps<T extends FieldValues, P extends FieldPath<T>> = {
-  control: Control<T>;
-  name: P;
-  label: string;
-  options: Option[];
-} & React.SelectHTMLAttributes<HTMLSelectElement>;
+type ObjOption = {
+  value: string;
+  label: React.ReactNode;
+  disabled?: boolean;
+};
 
-export const FormSelect = fixedForwardRef(
-  <T extends FieldValues, P extends FieldPath<T>>(
-    { control, name, label, options, ...props }: FormSelectProps<T, P>,
-    ref: React.ForwardedRef<HTMLSpanElement>,
-  ) => {
-    return (
-      <FormField
-        control={control}
-        name={name}
-        render={({ field }) => (
-          <FormItem>
-            <Select onValueChange={field.onChange} defaultValue={field.value}>
-              <FormControl>
-                <SelectTrigger>
-                  <SelectValue ref={ref} {...props} />
-                </SelectTrigger>
-              </FormControl>
-              <SelectContent>
-                {options.map((option) => (
-                  <SelectItem
-                    key={option.value || option}
-                    value={option.value || option}
-                  >
-                    {option.label || option}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
-          </FormItem>
-        )}
-      />
-    );
-  },
-);
+type Options = StrOption[] | ObjOption[];
 
-export const FormSelectWithoutRef = <
-  T extends FieldValues,
-  P extends FieldPath<T>,
+type FormSelectProps<
+  T extends Options,
+  TFieldValues extends FieldValues,
+  TName extends FieldPath<TFieldValues>,
+> = {
+  control: Control<TFieldValues>;
+  name: TName;
+  label: React.ReactNode;
+  options: T;
+};
+
+export const FormSelect = <
+  T extends Options,
+  TFieldValues extends FieldValues,
+  TName extends FieldPath<TFieldValues>,
 >({
   control,
   name,
-  label,
+  label = name,
   options,
-  ...props
-}: FormSelectProps<T, P>) => {
-  return (
-    <FormField
-      control={control}
-      name={name}
-      render={({ field }) => (
-        <FormItem>
-          <Select onValueChange={field.onChange} defaultValue={field.value}>
-            <FormControl>
-              <SelectTrigger>
-                <SelectValue {...props} />
-              </SelectTrigger>
-            </FormControl>
-            <SelectContent>
-              {options.map((option) => (
-                <SelectItem
-                  key={option.value || option}
-                  value={option.value || option}
-                >
-                  {option.label || option}
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
-        </FormItem>
-      )}
-    />
-  );
-};
+}: FormSelectProps<T, TFieldValues, TName>) => (
+  <FormField
+    control={control}
+    name={name}
+    render={({ field }) => (
+      <FormItem>
+        <FormLabel>{label}</FormLabel>
+        <Select onValueChange={field.onChange} defaultValue={field.value}>
+          <FormControl>
+            <SelectTrigger>
+              <SelectValue />
+            </SelectTrigger>
+          </FormControl>
+          <SelectContent>
+            {options.map((option) => {
+              if (typeof option === "string") {
+                return (
+                  <SelectItem key={option} value={option}>
+                    {option}
+                  </SelectItem>
+                );
+              } else {
+                return (
+                  <SelectItem
+                    key={option.value}
+                    value={option.value}
+                    disabled={option.disabled}
+                  >
+                    {option.label}
+                  </SelectItem>
+                );
+              }
+            })}
+          </SelectContent>
+        </Select>
+        <FormMessage />
+      </FormItem>
+    )}
+  />
+);

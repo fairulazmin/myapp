@@ -1,15 +1,14 @@
 "use client";
 
 import React, { useEffect, useRef } from "react";
-import { UserForm } from "./user-form";
-import { Input, Input2, InputThree, Input3, Input4 } from "./input";
-import { Button } from "@/components/ui/button";
+import { UserInputForm } from "./user-input-form";
+import { UserSelectForm } from "./user-select-form";
 
 const GenericInputPage = () => {
   return (
     <div className="container space-y-3">
-      <h1>Generic Input Page </h1>
-      <UserForm />
+      <h1>Generic Page </h1>
+      <UserSelectForm />
     </div>
   );
 };

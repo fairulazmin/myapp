@@ -22,15 +22,9 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Button } from "@/components/ui/button";
-import { FormSelect, FormSelectWithoutRef } from "./form-select";
-import { FormSelect as FormSelect2 } from "./form-select2";
-
-type Option = string[] | { label: string; value: string }[];
-const option1: Option = ["malik", "Jack", "Nancy"];
-const option2: Option = [
-  { value: "mary", label: "Mary" },
-  { value: "jane", label: "Jane" },
-];
+import { FormInput } from "./form-input";
+import { FormInput as FormInput2 } from "./form-input2";
+import { FormInput as FormInput3 } from "./form-input-mysa";
 
 const userFormSchema = z.object({
   firstName: z.string().min(2),
@@ -43,7 +37,7 @@ const userFormSchema = z.object({
 
 type UserFormValues = z.infer<typeof userFormSchema>;
 
-export const UserForm = () => {
+export const UserInputForm = () => {
   const form = useForm<UserFormValues>({
     resolver: zodResolver(userFormSchema),
   });
@@ -60,46 +54,47 @@ export const UserForm = () => {
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)}>
           <div className="space-y-3 max-w-md mx-auto">
-            <FormField
+            <FormInput
               control={form.control}
               name="firstName"
+              label="First Name"
+            />
+            <FormInput2
+              control={form.control}
+              name="lastName"
+              label="Last Name"
+            />
+            <FormInput3 control={form.control} name="spouse" label="spouse" />
+            <FormInput
+              control={form.control}
+              name="maidenName"
+              label="Maiden Name"
+            />
+            <FormField
+              control={form.control}
+              name="company"
               render={({ field }) => (
                 <FormItem>
-                  <Select
-                    onValueChange={field.onChange}
-                    defaultValue={field.value}
-                  >
-                    <FormControl>
-                      <SelectTrigger>
-                        <SelectValue />
-                      </SelectTrigger>
-                    </FormControl>
-                    <SelectContent>
-                      {option2.map((option) => (
-                        <SelectItem
-                          key={option || option.value}
-                          value={option || option.value}
-                        >
-                          {option || option.label}
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
+                  <FormLabel>Company</FormLabel>
+                  <FormControl>
+                    <Input {...field} />
+                  </FormControl>
+                  <FormMessage />
                 </FormItem>
               )}
             />
-            <FormSelect2
+            <FormField
               control={form.control}
-              name="lastName"
-              option={["malik", "Jack", "Nancy"]}
-            />
-            <FormSelect2
-              control={form.control}
-              name="lastName"
-              option={[
-                { value: "Mary", label: "Mary" },
-                { value: "Jane", age: 40 },
-              ]}
+              name="sex"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Sex</FormLabel>
+                  <FormControl>
+                    <Input {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
             />
             <Button type="submit" className="w-full" variant="secondary">
               Submit
