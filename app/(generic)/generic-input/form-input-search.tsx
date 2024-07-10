@@ -53,15 +53,11 @@ export const FormInputSearch = fixedForwardRef(
       if (!searchInput) return [];
 
       const searchWords = searchInput.trim().split(/ +/);
+      const re = searchWords.map((i) => new RegExp(`(?:${i})`, "i"));
+
       return lists
         .map((item) => getValues(item, order))
-        .filter(
-          (searchKey) =>
-            searchKey.toLowerCase().startsWith(searchWords[0].toLowerCase()) &&
-            searchWords.every((word) =>
-              searchKey.toLowerCase().includes(word.toLowerCase()),
-            ),
-        )
+        .filter((searchKey) => re.every((r) => searchKey.match(r) !== null))
         .slice(0, 5);
     }, [searchInput]);
 
@@ -125,3 +121,15 @@ export const FormInputSearch = fixedForwardRef(
     );
   },
 );
+
+//   return lists
+//     .map((item) => getValues(item, order))
+//     .filter(
+//       (searchKey) =>
+//         searchKey.toLowerCase().startsWith(searchWords[0].toLowerCase()) &&
+//         searchWords.every((word) =>
+//           searchKey.toLowerCase().includes(word.toLowerCase()),
+//         ),
+//     )
+//     .slice(0, 5);
+// }, [searchInput]);
