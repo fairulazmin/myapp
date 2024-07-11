@@ -53,7 +53,7 @@ export const FormInputSearch = fixedForwardRef(
       if (!searchInput) return [];
 
       const searchWords = searchInput.trim().split(/ +/);
-      const re = searchWords.map((i) => new RegExp(`(?:${i})`, "i"));
+      const re = searchWords.map((i) => new RegExp(`${i}`, "i"));
 
       return lists
         .map((item) => getValues(item, order))

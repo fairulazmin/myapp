@@ -21,11 +21,21 @@ import {
   FormControl,
   FormMessage,
 } from "@/components/ui/form";
+import {
+  Command,
+  CommandInput,
+  CommandItem,
+  CommandEmpty,
+  CommandList,
+  CommandGroup,
+  CommandSeparator,
+} from "@/components/ui/command";
 import { Button } from "@/components/ui/button";
 import { FormSelect } from "./form-select";
 import { FormSelect as FormSelectMysa } from "./form-select-mysa";
 import { FormSelect as FormSelect2 } from "./form-select2";
 import { FormInputSearch } from "./form-input-search";
+import { FormCommandSearch } from "./form-command-search";
 import lists from "@/lib/cities-list";
 
 const option1 = ["Malik", "Jack", "Nancy"];
@@ -101,13 +111,35 @@ export const UserSelectForm = () => {
               label="Spouse"
               options={option1}
             />
-            <FormInputSearch
+            {/* <FormInputSearch */}
+            {/*   control={form.control} */}
+            {/*   name="location" */}
+            {/*   label="Location" */}
+            {/*   lists={lists} */}
+            {/*   order={["name", "subcountry", "country"]} */}
+            {/* /> */}
+            <FormCommandSearch
               control={form.control}
               name="location"
               label="Location"
               lists={lists}
               order={["name", "subcountry", "country"]}
             />
+            {/* <Command> */}
+            {/*   <CommandInput placeholder="Type a command or search..." /> */}
+            {/*   <CommandList className="bg-background"> */}
+            {/*     {["Profile", "Billing", "Settings"].map((item) => ( */}
+            {/*       <div */}
+            {/*         key={item} */}
+            {/*         onClick={() => { */}
+            {/*           console.log(item); */}
+            {/*         }} */}
+            {/*       > */}
+            {/*         <CommandItem key="item">{item}</CommandItem> */}
+            {/*       </div> */}
+            {/*     ))} */}
+            {/*   </CommandList> */}
+            {/* </Command> */}
             <Button type="submit" className="w-full" variant="secondary">
               Submit
             </Button>
