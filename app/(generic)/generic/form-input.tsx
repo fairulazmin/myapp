@@ -25,7 +25,14 @@ export const FormInput = fixedForwardRef(
           <FormItem>
             <FormLabel>{label}</FormLabel>
             <FormControl>
-              <Input {...field} ref={ref} {...props} />
+              <Input
+                {...field}
+                // onChange={(e) => field.onChange(e)}
+                // onChange={field.onChange}
+                // onChange={() => field.onChange}//Not working
+                ref={ref}
+                {...props}
+              />
             </FormControl>
             <FormMessage />
           </FormItem>

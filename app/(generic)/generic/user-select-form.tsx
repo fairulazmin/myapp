@@ -34,7 +34,7 @@ import { Button } from "@/components/ui/button";
 import { FormSelect } from "./form-select";
 import { FormSelect as FormSelectMysa } from "./form-select-mysa";
 import { FormSelect as FormSelect2 } from "./form-select2";
-import { FormInputSearch } from "./form-input-search";
+import { FormInputSearch } from "./form-input-search2";
 import { FormCommandSearch } from "./form-command-search";
 import lists from "@/lib/cities-list";
 
@@ -75,56 +75,56 @@ export const UserSelectForm = () => {
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)}>
           <div className="space-y-3 max-w-md mx-auto">
-            <FormField
-              control={form.control}
-              name="firstName"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>First Name</FormLabel>
-                  <Select
-                    onValueChange={field.onChange}
-                    defaultValue={field.value}
-                  >
-                    <FormControl>
-                      <SelectTrigger>
-                        <SelectValue placeholder="Select your first name" />
-                      </SelectTrigger>
-                    </FormControl>
-                    <SelectContent>
-                      <SelectItem value="fairul">Fairul</SelectItem>
-                      <SelectItem value="jack">Jack</SelectItem>
-                      <SelectItem value="marry">Marry</SelectItem>
-                    </SelectContent>
-                  </Select>
-                </FormItem>
-              )}
-            />
-            <FormSelectMysa
-              control={form.control}
-              name="lastName"
-              label="Last Name"
-              options={option2}
-            />
-            <FormSelect
-              control={form.control}
-              name="spouse"
-              label="Spouse"
-              options={option1}
-            />
-            {/* <FormInputSearch */}
+            {/* <FormField */}
             {/*   control={form.control} */}
-            {/*   name="location" */}
-            {/*   label="Location" */}
-            {/*   lists={lists} */}
-            {/*   order={["name", "subcountry", "country"]} */}
+            {/*   name="firstName" */}
+            {/*   render={({ field }) => ( */}
+            {/*     <FormItem> */}
+            {/*       <FormLabel>First Name</FormLabel> */}
+            {/*       <Select */}
+            {/*         onValueChange={field.onChange} */}
+            {/*         defaultValue={field.value} */}
+            {/*       > */}
+            {/*         <FormControl> */}
+            {/*           <SelectTrigger> */}
+            {/*             <SelectValue placeholder="Select your first name" /> */}
+            {/*           </SelectTrigger> */}
+            {/*         </FormControl> */}
+            {/*         <SelectContent> */}
+            {/*           <SelectItem value="fairul">Fairul</SelectItem> */}
+            {/*           <SelectItem value="jack">Jack</SelectItem> */}
+            {/*           <SelectItem value="marry">Marry</SelectItem> */}
+            {/*         </SelectContent> */}
+            {/*       </Select> */}
+            {/*     </FormItem> */}
+            {/*   )} */}
             {/* /> */}
-            <FormCommandSearch
+            {/* <FormSelectMysa */}
+            {/*   control={form.control} */}
+            {/*   name="lastName" */}
+            {/*   label="Last Name" */}
+            {/*   options={option2} */}
+            {/* /> */}
+            {/* <FormSelect */}
+            {/*   control={form.control} */}
+            {/*   name="spouse" */}
+            {/*   label="Spouse" */}
+            {/*   options={option1} */}
+            {/* /> */}
+            <FormInputSearch
               control={form.control}
               name="location"
               label="Location"
               lists={lists}
               order={["name", "subcountry", "country"]}
             />
+            {/* <FormCommandSearch */}
+            {/*   control={form.control} */}
+            {/*   name="location" */}
+            {/*   label="Location" */}
+            {/*   lists={lists} */}
+            {/*   order={["name", "subcountry", "country"]} */}
+            {/* /> */}
             {/* <Command> */}
             {/*   <CommandInput placeholder="Type a command or search..." /> */}
             {/*   <CommandList className="bg-background"> */}

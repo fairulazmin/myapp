@@ -7,7 +7,7 @@ interface Todo {
 
 interface TodoStore {
   todos: Todo[];
-  descriptionAction: (e: React.FormEvent<HTMLInputElement>, id: number) => void;
+  descriptionAction: (value: string, id: number) => void;
   statusAction: (id: number) => void;
   deleteAction: (id: number) => void;
   addAction: () => void;
@@ -30,10 +30,10 @@ const todos: Todo[] = [
 
 export const useTodosStore = create<TodoStore>((set) => ({
   todos,
-  descriptionAction: (e, id) =>
+  descriptionAction: (value, id) =>
     set((state) => {
       const todos = [...state.todos];
-      todos[id] = { ...todos[id], description: e.currentTarget.value };
+      todos[id] = { ...todos[id], description: value };
       return { todos };
     }),
   statusAction: (id) =>

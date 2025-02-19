@@ -34,7 +34,7 @@ export const TodoList = () => {
               <TableCell>{id + 1}</TableCell>
               <TableCell>
                 <Input
-                  onChange={(e) => descriptionAction(e, id)}
+                  onChange={(e) => descriptionAction(e.target.value, id)}
                   value={todo.description}
                   className="border-none"
                 />
